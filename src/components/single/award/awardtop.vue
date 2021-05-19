@@ -1,0 +1,78 @@
+<template>
+  <div class="flex flex-wrap overflow-hidden mx-3 mt-4">
+    <div class="bg-black w-full rounded-xl" style="height: 24em">
+      <div class="flex flex-wrap overflow-hidden">
+        <div class="md:w-1/2" style="padding: 9%">
+          <p class="text-white text-xl">Discover Awards in the World!</p>
+          <p class="text-white text-xl mt-4">
+            Academy Awards, Emmy Awards, Cannes Film Festival and more ...
+          </p>
+        </div>
+        <div class="md:w-1/2 p-2">
+          <lottie
+            :width="350"
+            :height="350"
+            :options="lottieOptions.awards"
+            v-on:animCreated="handleAnimation($event, 'awardsAnim')"
+            class="displayNone"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <lottie
+        :options="lottieOptions.logo"
+        v-on:animCreated="handleAnimation($event, 'awardLogo')"
+        class="w-full rounded-full w-32 h-32 -mt-20 ml-20 person-img"
+        style="
+          width: 100px;
+          height: 100px;
+          overflow: hidden;
+          margin: 0px auto;
+          border: 1px solid white;
+          padding: 15%;
+          margin-top: -56%;
+          margin-left: 34%;
+          background: #181818;
+        "
+      />
+    </div>
+  </div>
+</template>
+<script>
+import lottie from "vue-lottie/src/lottie.vue";
+import * as awardsAnimationData from "~/assets/lottie/Awards.json";
+import * as awardsLogoData from "~/assets/lottie/awardLogo.json";
+
+export default {
+  components: {
+    lottie,
+  },
+  data() {
+    return {
+      anim: {
+        awardsAnim: null,
+        awardLogo: null,
+      },
+      lottieOptions: {
+        awards: { animationData: awardsAnimationData.default },
+        logo: { animationData: awardsLogoData.default },
+      },
+    };
+  },
+  methods: {
+    handleAnimation: function (anim, type) {
+      this.anim[type] = anim;
+    },
+  },
+
+  mounted() {},
+};
+</script>
+<style>
+@media only screen and (max-width: 770px) {
+  .displayNone {
+    display: none;
+  }
+}
+</style>
